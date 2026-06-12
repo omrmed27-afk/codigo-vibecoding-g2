@@ -1,5 +1,5 @@
 from rest_framework import viewsets, status
-from rest_framework.permissions import IsAuthenticated
+from core.permissions import StrictDjangoModelPermissions
 from rest_framework.response import Response
 
 from .models import Supplier
@@ -9,7 +9,7 @@ from .services import SupplierService
 
 class SupplierViewSet(viewsets.ModelViewSet):
     queryset = Supplier.objects.all()
-    permission_classes = [IsAuthenticated]
+    permission_classes = [StrictDjangoModelPermissions]
 
     filterset_fields = ['city', 'country']
     search_fields = ['name', 'contact_name', 'email']

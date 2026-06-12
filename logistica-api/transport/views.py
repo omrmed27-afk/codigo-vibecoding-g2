@@ -2,7 +2,7 @@ from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.exceptions import ValidationError
 from rest_framework.generics import get_object_or_404
-from rest_framework.permissions import IsAuthenticated
+from core.permissions import StrictDjangoModelPermissions
 from rest_framework.response import Response
 
 from drivers.models import Driver
@@ -12,7 +12,7 @@ from .services import TransportService
 
 
 class TransportViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [StrictDjangoModelPermissions]
     filterset_fields = ['status', 'type', 'driver']
     search_fields = ['name', 'plate_number']
     ordering_fields = ['name', 'created_at', 'status']

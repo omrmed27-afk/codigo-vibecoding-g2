@@ -1,5 +1,5 @@
 from rest_framework import viewsets, status
-from rest_framework.permissions import IsAuthenticated
+from core.permissions import StrictDjangoModelPermissions
 from rest_framework.response import Response
 
 from .models import Warehouse
@@ -9,7 +9,7 @@ from .services import WarehouseService
 
 class WarehouseViewSet(viewsets.ModelViewSet):
     queryset = Warehouse.objects.all()
-    permission_classes = [IsAuthenticated]
+    permission_classes = [StrictDjangoModelPermissions]
 
     filterset_fields = ['is_active', 'city', 'country']
     search_fields = ['name', 'address', 'city']

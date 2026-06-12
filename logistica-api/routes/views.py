@@ -1,7 +1,7 @@
 from drf_spectacular.utils import OpenApiParameter, extend_schema
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
-from rest_framework.permissions import IsAuthenticated
+from core.permissions import StrictDjangoModelPermissions
 from rest_framework.response import Response
 
 from .models import Route
@@ -15,7 +15,7 @@ from .services import RouteService
 
 
 class RouteViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [StrictDjangoModelPermissions]
     filterset_fields = ['status', 'origin_warehouse']
     search_fields = ['name']
     ordering_fields = ['name', 'created_at']

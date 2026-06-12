@@ -1,7 +1,7 @@
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.generics import get_object_or_404
-from rest_framework.permissions import IsAuthenticated
+from core.permissions import StrictDjangoModelPermissions
 from rest_framework.response import Response
 from rest_framework.exceptions import ValidationError
 
@@ -13,7 +13,7 @@ from .services import ShipmentService
 
 
 class ShipmentViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [StrictDjangoModelPermissions]
     filterset_fields = ['status', 'customer', 'origin_warehouse', 'transport']
     search_fields = ['tracking_number', 'destination_city', 'destination_country']
     ordering_fields = ['created_at', 'scheduled_delivery_date', 'base_cost']
@@ -62,6 +62,12 @@ class ShipmentViewSet(viewsets.ModelViewSet):
         if route_id:
             route = get_object_or_404(Route, pk=route_id)
         shipment = ShipmentService.assign_transport(instance, transport, route)
+        return Response(ShipmentReadSerializer(shipment).data)
+
+    @action(detail=True, methods=['post'], url_path='mark-in-transit')
+    def mark_in_transit(self, request, pk=None):
+        instance = self.get_object()
+        shipment = ShipmentService.mark_in_transit(instance)
         return Response(ShipmentReadSerializer(shipment).data)
 
     @action(detail=True, methods=['post'], url_path='mark-delivered')

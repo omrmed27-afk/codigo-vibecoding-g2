@@ -1,5 +1,5 @@
 from rest_framework import viewsets, status
-from rest_framework.permissions import IsAuthenticated
+from core.permissions import StrictDjangoModelPermissions
 from rest_framework.response import Response
 
 from .models import Product
@@ -8,7 +8,7 @@ from .services import ProductService
 
 
 class ProductViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [StrictDjangoModelPermissions]
 
     filterset_fields = ['supplier', 'warehouse']
     search_fields = ['name', 'sku', 'description']

@@ -76,6 +76,14 @@ class ShipmentService:
         return _get_full_shipment(instance.pk)
 
     @staticmethod
+    def mark_in_transit(instance: Shipment) -> Shipment:
+        if instance.status != Shipment.ShipmentStatus.PICKED_UP:
+            raise ValidationError('Shipment must be in picked_up status to mark as in_transit.')
+        instance.status = Shipment.ShipmentStatus.IN_TRANSIT
+        instance.save()
+        return _get_full_shipment(instance.pk)
+
+    @staticmethod
     def mark_delivered(instance: Shipment) -> Shipment:
         if instance.status not in (
             Shipment.ShipmentStatus.PICKED_UP,

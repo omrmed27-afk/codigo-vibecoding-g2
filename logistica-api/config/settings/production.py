@@ -4,6 +4,11 @@ from decouple import config
 
 DEBUG = False
 
+RAILWAY_DOMAIN = config('RAILWAY_PUBLIC_DOMAIN', default='')
+if RAILWAY_DOMAIN:
+    ALLOWED_HOSTS.append(RAILWAY_DOMAIN)
+    CSRF_TRUSTED_ORIGINS = [f'https://{RAILWAY_DOMAIN}']
+
 DATABASES = {
     'default': dj_database_url.config(
         default=config('DATABASE_URL'),
@@ -18,3 +23,16 @@ SECURE_SSL_REDIRECT = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
+
+MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
+
+STORAGES = {
+    'default': {
+        'BACKEND': 'django.core.files.storage.FileSystemStorage',
+    },
+    'staticfiles': {
+        'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
+    },
+}
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

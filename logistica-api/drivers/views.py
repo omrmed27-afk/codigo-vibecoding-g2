@@ -1,5 +1,5 @@
 from rest_framework import viewsets, status
-from rest_framework.permissions import IsAuthenticated
+from core.permissions import StrictDjangoModelPermissions
 from rest_framework.response import Response
 
 from .models import Driver
@@ -8,7 +8,7 @@ from .services import DriverService
 
 
 class DriverViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [StrictDjangoModelPermissions]
     filterset_fields = ['status']
     search_fields = ['user__username', 'user__email', 'license_number']
     ordering_fields = ['created_at', 'status']
