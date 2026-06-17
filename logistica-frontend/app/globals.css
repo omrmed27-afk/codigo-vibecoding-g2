@@ -1,0 +1,163 @@
+@import "tailwindcss";
+
+/* shadcn/ui — neutral theme CSS variables */
+:root {
+  color-scheme: light;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --radius: 0.625rem;
+}
+
+.dark {
+  color-scheme: dark;
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.145 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.985 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.269 0 0);
+  --input: oklch(0.269 0 0);
+  --ring: oklch(0.439 0 0);
+}
+
+/* Map CSS vars to Tailwind 4 color tokens */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* ── Landing brand tokens ── */
+  --color-brand-blue: #2563EB;
+  --color-brand-blue-soft: #3B82F6;
+  --color-brand-orange: #F97316;
+  --color-brand-dark: #070E1B;
+  --color-brand-navy: #0D1B35;
+  --color-brand-light: #EFF6FF;
+
+  /* Font families (resolved from next/font CSS vars) */
+  --font-heading: var(--font-lexend);
+  --font-body: var(--font-source-sans);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* ── Landing — LogisticaWeb Design System ── */
+:root {
+  --land-primary: #2563EB;
+  --land-secondary: #3B82F6;
+  --land-cta: #F97316;
+  --land-bg: #EFF6FF;
+  --land-text: #1E40AF;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 28s linear infinite;
+  will-change: transform;
+  display: inline-flex;
+}
+
+/* Mesh gradient blobs — CSS-animated for compositor thread (no JS overhead) */
+@keyframes blob-pulse-a {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.1); }
+}
+@keyframes blob-pulse-b {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.15); }
+}
+@keyframes blob-pulse-c {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.2); }
+}
+
+.blob-primary {
+  background: radial-gradient(circle, rgba(37,99,235,0.22) 0%, transparent 70%);
+  animation: blob-pulse-a 8s ease-in-out infinite;
+  will-change: transform;
+}
+.blob-secondary {
+  background: radial-gradient(circle, rgba(249,115,22,0.18) 0%, transparent 70%);
+  animation: blob-pulse-b 10s ease-in-out infinite 2s;
+  will-change: transform;
+}
+.blob-center {
+  background: radial-gradient(circle, rgba(59,130,246,0.1) 0%, transparent 70%);
+  animation: blob-pulse-c 12s ease-in-out infinite 4s;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .blob-primary,
+  .blob-secondary,
+  .blob-center {
+    animation: none;
+  }
+}
