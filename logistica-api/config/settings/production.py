@@ -17,14 +17,14 @@ DATABASES = {
     )
 }
 
-CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', default='', cast=lambda v: [s.strip() for s in v.split(',') if s.strip()])
+CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', default='https://logistica-frontend-coral.vercel.app', cast=lambda v: [s.strip() for s in v.split(',') if s.strip()])
 
 SECURE_SSL_REDIRECT = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 
-MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
+MIDDLEWARE.insert(2, 'whitenoise.middleware.WhiteNoiseMiddleware')
 
 STORAGES = {
     'default': {
