@@ -18,6 +18,7 @@ DATABASES = {
 }
 
 CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', default='https://logistica-frontend-coral.vercel.app', cast=lambda v: [s.strip() for s in v.split(',') if s.strip()])
+CORS_ALLOW_CREDENTIALS = True
 
 SECURE_SSL_REDIRECT = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
