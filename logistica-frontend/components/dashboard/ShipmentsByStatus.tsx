@@ -76,7 +76,7 @@ export default function ShipmentsByStatus() {
               ))}
             </Pie>
             <Tooltip
-              formatter={(value: number, name: string) => [`${value} envíos`, name]}
+              formatter={(value, name) => [`${value} envíos`, name]}
               contentStyle={{ fontSize: 12, borderRadius: 6, border: '1px solid #e5e7eb' }}
             />
             <Legend

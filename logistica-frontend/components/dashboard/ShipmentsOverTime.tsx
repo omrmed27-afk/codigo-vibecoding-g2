@@ -111,7 +111,7 @@ export default function ShipmentsOverTime({ days = 30 }: ShipmentsOverTimeProps)
                 const item = payload?.[0]?.payload
                 return item?.weekFull ?? label
               }}
-              formatter={(value: number) => [`${value} envíos`, 'Total']}
+              formatter={(value) => [`${value} envíos`, 'Total']}
               contentStyle={{ fontSize: 12, borderRadius: 6, border: '1px solid #e5e7eb', color: '#111827' }}
             />
             <Area
